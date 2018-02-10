@@ -8,7 +8,7 @@ namespace DH.Versioning{
     [CreateAssetMenu(fileName = "Version", menuName = "DH/Versioning/Create Version File", order = 0)]
     public class Version : ScriptableObject
     {
-        public const string Path = "Assets/Resources/Version.asset";
+        public const string Path = "Assets/DHVersioning/Resources/Version.asset";
         public const string FileLabel = "versionFile";
         
         public static Version LoadFromDefaultPath()

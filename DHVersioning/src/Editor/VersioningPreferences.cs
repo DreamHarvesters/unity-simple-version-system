@@ -5,7 +5,7 @@ namespace DH.Versioning
 //    [CreateAssetMenu(fileName = "VersioningPreferences", menuName = "DH/Versioning/Create Versioning Preferences", order = 0)]
     public class VersioningPreferences : ScriptableObject
     {
-        public const string Path = "Assets/DHVersioning/src/Editor/VersioningPreferences.asset";
+        public const string Path = "Assets/Editor/VersioningPreferences.asset";
         public const string FileLabel = "VersioningPreferences";
         
         private bool automaticallyIncreaseRevisionBySave = true;

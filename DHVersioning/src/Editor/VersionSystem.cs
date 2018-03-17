@@ -44,6 +44,7 @@ namespace DH.Versioning
             SetMinorVersion(0);
             this.version.Major = version;
 
+            AssetDatabase.SaveAssets();
             Debug.Log(string.Format("Version update: {0}", this.version.FullVersion));
         }
 
@@ -52,6 +53,7 @@ namespace DH.Versioning
             this.version.ResetRevisionBuildPlayVersions();
             this.version.Minor = version;
             
+            AssetDatabase.SaveAssets();
             Debug.Log(string.Format("Version update: {0}", this.version.FullVersion));
         }
 
@@ -62,6 +64,7 @@ namespace DH.Versioning
             
             this.version.Build = version;
 
+            AssetDatabase.SaveAssets();
             Debug.Log(string.Format("Version update: {0}", this.version.FullVersion));
         }
 
@@ -72,6 +75,7 @@ namespace DH.Versioning
             
             this.version.Revision = version;
             
+            AssetDatabase.SaveAssets();
             Debug.Log(string.Format("Version update: {0}", this.version.FullVersion));
         }
         
@@ -82,20 +86,27 @@ namespace DH.Versioning
             
             this.version.Play = version;
             
+            AssetDatabase.SaveAssets();
             Debug.Log(string.Format("Version update: {0}", this.version.FullVersion));
         }
 
         private void LoadOrCreateVersionAsset()
         {
+            AssetDatabase.Refresh();
             version = AssetDatabase.LoadAssetAtPath<Version>(Version.Path);
+
             if (version == null)
             {
+                Debug.LogWarning("Version file could not be found");
                 string folder, parentPath; 
                 Utils.GetFolderAndParentPath(Version.Path, out parentPath, out folder);
                 if (!AssetDatabase.IsValidFolder(parentPath + "/" + folder))
                     AssetDatabase.CreateFolder(parentPath, folder);
 
                 version = ScriptableObject.CreateInstance<Version>();
+                
+                Debug.Log("Creating a new version file");
+                
                 AssetDatabase.CreateAsset(version, Version.Path);
                 
                 AssetDatabase.SetLabels(version, new []{Version.FileLabel});
@@ -104,7 +115,9 @@ namespace DH.Versioning
 
         private void LoadOrCreatePreferences()
         {
+            AssetDatabase.Refresh();
             preferences = AssetDatabase.LoadAssetAtPath<VersioningPreferences>(VersioningPreferences.Path);
+            
             if (preferences == null)
             {
                 string folder, parentPath; 

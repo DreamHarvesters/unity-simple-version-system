@@ -15,6 +15,8 @@ namespace DH.Versioning
         [SerializeField] private VersionSystem versionSystem;
         [SerializeField] private VersioningPreferences preferences;
 
+        private string currentVersion;
+
         private void OnGUI()
         {
             DrawInitializeIfNot();
@@ -43,6 +45,11 @@ namespace DH.Versioning
         {
             if (VersionSystem.IsInitialized)
             {
+                EditorGUILayout.LabelField("Current Version: " + currentVersion);
+
+                EditorGUILayout.Space();
+                EditorGUILayout.Space();
+                
                 EditorGUILayout.LabelField("Revision version may cause conflicts in projects using using subversioning system.");
                 preferences.AutomaticallyIncreaseRevisionBySave = GUILayout.Toggle(
                     preferences.AutomaticallyIncreaseRevisionBySave, "Automatically Increase Revision When Saved");
@@ -74,6 +81,8 @@ namespace DH.Versioning
         {
             versionSystem = new VersionSystem();
             preferences = versionSystem.Preferences;
+
+            currentVersion = versionSystem.Version.FullVersion;
         }
     }
 }

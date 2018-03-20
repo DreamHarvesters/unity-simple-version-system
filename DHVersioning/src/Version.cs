@@ -18,9 +18,9 @@ namespace DH.Versioning{
         
         [SerializeField] private int major;
         [SerializeField] private int minor;
-        [ReadOnly][SerializeField] private int build;
-        [ReadOnly][SerializeField] private int revision;
-        [ReadOnly][SerializeField] private int play;
+        [SerializeField] private int build;
+        [SerializeField] private int revision;
+        [SerializeField] private int play;
 
         public int Major
         {

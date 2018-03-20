@@ -92,7 +92,7 @@ namespace DH.Versioning
 
         private void LoadOrCreateVersionAsset()
         {
-            AssetDatabase.Refresh();
+            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
             version = AssetDatabase.LoadAssetAtPath<Version>(Version.Path);
 
             if (version == null)

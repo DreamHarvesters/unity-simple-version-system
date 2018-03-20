@@ -15,8 +15,8 @@ namespace DH.Versioning
         
         public void IncreaseVersion()
         {
-//            VersionSystem system = VersionSystem.Instance;
-//            system.SetRevisionVersion(system.Version.Revision + 1);
+            VersionSystem system = VersionSystem.Instance;
+            system.SetRevisionVersion(system.Version.Revision + 1);
         }
     }
 }

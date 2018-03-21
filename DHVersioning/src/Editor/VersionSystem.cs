@@ -44,6 +44,7 @@ namespace DH.Versioning
             SetMinorVersion(0);
             this.version.Major = version;
 
+            EditorUtility.SetDirty(this.version);
             AssetDatabase.SaveAssets();
             Debug.Log(string.Format("Version update: {0}", this.version.FullVersion));
         }
@@ -53,6 +54,7 @@ namespace DH.Versioning
             this.version.ResetRevisionBuildPlayVersions();
             this.version.Minor = version;
             
+            EditorUtility.SetDirty(this.version);
             AssetDatabase.SaveAssets();
             Debug.Log(string.Format("Version update: {0}", this.version.FullVersion));
         }
@@ -64,6 +66,7 @@ namespace DH.Versioning
             
             this.version.Build = version;
 
+            EditorUtility.SetDirty(this.version);
             AssetDatabase.SaveAssets();
             Debug.Log(string.Format("Version update: {0}", this.version.FullVersion));
         }
@@ -86,6 +89,7 @@ namespace DH.Versioning
             
             this.version.Play = version;
             
+            EditorUtility.SetDirty(this.version);
             AssetDatabase.SaveAssets();
             Debug.Log(string.Format("Version update: {0}", this.version.FullVersion));
         }

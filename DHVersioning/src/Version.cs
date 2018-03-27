@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Collections;
 
-namespace DH.Versioning{
-    
+namespace DH.Versioning
+{
     [CreateAssetMenu(fileName = "Version", menuName = "DH/Versioning/Create Version File", order = 0)]
     public class Version : ScriptableObject
     {
         public const string Path = "Assets/Resources/Version.asset";
         public const string FileLabel = "versionFile";
-        
+
         public static Version LoadFromDefaultPath()
         {
             return Resources.Load<Version>(Utils.GetFileName(Path, "asset"));
         }
-        
+
         [SerializeField] private int major;
         [SerializeField] private int minor;
         [SerializeField] private int build;
@@ -54,7 +54,17 @@ namespace DH.Versioning{
 
         public string FullVersion
         {
-            get { return string.Format("{0}-{1}-{2}-{3}-{4}", major, minor, build, revision, play); }
+            get { return string.Format("{0}.{1}.{2}.{3}.{4}", major, minor, build, revision, play); }
+        }
+
+        public string MajorMinorBuildVersion
+        {
+            get { return string.Format("{0}.{1}.{2}", major, minor, build); }
+        }
+
+        public string MajorMinorVersion
+        {
+            get { return string.Format("{0}.{1}", major, minor); }
         }
 
         public void ResetRevisionBuildPlayVersions()

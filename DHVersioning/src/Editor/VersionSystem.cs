@@ -78,6 +78,7 @@ namespace DH.Versioning
             
             this.version.Revision = version;
             
+            EditorUtility.SetDirty(this.version);
             AssetDatabase.SaveAssets();
             Debug.Log(string.Format("Version update: {0}", this.version.FullVersion));
         }

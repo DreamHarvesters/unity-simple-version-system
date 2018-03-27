@@ -74,6 +74,11 @@ namespace DH.Versioning
                 EditorGUILayout.Space();
                 if(GUILayout.Button("Reset all versions"))
                     versionSystem.SetMajorVersion(0);
+                
+                EditorGUILayout.Space();
+                if (GUILayout.Button("Update Project Settings Verion"))
+                    PlayerSettings.bundleVersion = versionSystem.Version.MajorMinorVersion;
+
             }
         }
 

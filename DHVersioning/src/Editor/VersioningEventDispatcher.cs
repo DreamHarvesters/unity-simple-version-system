@@ -32,8 +32,9 @@ namespace DH.Versioning
         [PostProcessBuild]
         private static void OnBuilt(BuildTarget target, string s)
         {
-            BuildVersionIncreaser buildVersionIncreaser = new BuildVersionIncreaser();
-            buildVersionIncreaser.IncreaseVersion();
+            //Build version need to be increased before build
+//            BuildVersionIncreaser buildVersionIncreaser = new BuildVersionIncreaser();
+//            buildVersionIncreaser.IncreaseVersion();
         }
     }
 }

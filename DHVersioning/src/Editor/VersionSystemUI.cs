@@ -20,13 +20,13 @@ namespace DH.Versioning
         private void OnGUI()
         {
             DrawInitializeIfNot();
-            
+
             DrawVersioningUI();
         }
 
         private void OnEnable()
         {
-            if(versionSystem == null)
+            if (versionSystem == null)
                 InitSystem();
         }
 
@@ -34,7 +34,7 @@ namespace DH.Versioning
         {
             if (!VersionSystem.IsInitialized)
             {
-                if(GUILayout.Button("Init Versioning System"))
+                if (GUILayout.Button("Init Versioning System"))
                 {
                     InitSystem();
                 }
@@ -49,36 +49,46 @@ namespace DH.Versioning
 
                 EditorGUILayout.Space();
                 EditorGUILayout.Space();
-                
-                EditorGUILayout.LabelField("Revision version may cause conflicts in projects using using subversioning system.");
+
+                EditorGUILayout.LabelField(
+                    "Revision version may cause conflicts in projects using using subversioning system.");
                 preferences.AutomaticallyIncreaseRevisionBySave = GUILayout.Toggle(
                     preferences.AutomaticallyIncreaseRevisionBySave, "Automatically Increase Revision When Saved");
-                
+
                 EditorGUILayout.Space();
                 preferences.AutomaticallyIncreaseBuild = GUILayout.Toggle(preferences.AutomaticallyIncreaseBuild,
                     "Automatically increase build version");
-                
+
                 EditorGUILayout.Space();
-                EditorGUILayout.LabelField("Revision version may cause conflicts in projects using using subversioning system.");
+                EditorGUILayout.LabelField(
+                    "Revision version may cause conflicts in projects using using subversioning system.");
                 preferences.AutomaticallyIncreaseWithPlay = GUILayout.Toggle(preferences.AutomaticallyIncreaseWithPlay,
                     "Automatically increase play version");
-                
+
                 EditorGUILayout.Space();
-                if(GUILayout.Button("Increment major version"))
+                if (GUILayout.Button("Increment major version"))
+                {
                     versionSystem.SetMajorVersion(versionSystem.Version.Major + 1);
-                
+                    UpdateVersion();
+                }
+
                 EditorGUILayout.Space();
-                if(GUILayout.Button("Increment minor version"))
+                if (GUILayout.Button("Increment minor version"))
+                {
                     versionSystem.SetMinorVersion(versionSystem.Version.Minor + 1);
-                
+                    UpdateVersion();
+                }
+
                 EditorGUILayout.Space();
-                if(GUILayout.Button("Reset all versions"))
+                if (GUILayout.Button("Reset all versions"))
+                {
                     versionSystem.SetMajorVersion(0);
-                
+                    UpdateVersion();
+                }
+
                 EditorGUILayout.Space();
                 if (GUILayout.Button("Update Project Settings Verion"))
                     PlayerSettings.bundleVersion = versionSystem.Version.MajorMinorVersion;
-
             }
         }
 
@@ -86,7 +96,10 @@ namespace DH.Versioning
         {
             versionSystem = new VersionSystem();
             preferences = versionSystem.Preferences;
+        }
 
+        void UpdateVersion()
+        {
             currentVersion = versionSystem.Version.FullVersion;
         }
     }
